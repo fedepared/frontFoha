@@ -1,0 +1,66 @@
+<div class="example-container mat-elevation-z8">
+    <button mat-fab color="primary" matTooltip="agregar empleado" (click)="addSelect()" [ngClass]="{'disabledButton': class==true}" >
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <br>
+    <br>
+    <mat-card style="width:80vw;">
+        <mat-card-content>
+            <span>Nº de referencia proceso elegido:</span>
+            <span *ngIf="numEtapa!=0">
+                <button mat-raised-button style="background-color:teal;color:whitesmoke">
+                    {{numEtapa}}
+                </button>
+            </span>
+            <span *ngIf="numEtapa==0 || numEtapa==null">
+                <button mat-raised-button color="warn">
+                    Sin nº de referencia
+                </button>
+            </span>
+            <div>últimos empleados asignados:</div>
+            <div *ngFor="let a of empleadosProcesoPausado" style="display:inline;">
+                <button mat-raised-button style="background-color: teal;color:white;">
+                    Legajo:{{a.id}} | nombre: {{a.nombreEmpleado}}
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <br>
+    <br>
+
+    <mat-form-field id="ref">
+        <mat-label>Nº de referencia para el proceso elegido</mat-label>
+        <input matInput placeholder="Referencia" (change)="numeroEtapa($event)" [(ngModel)]="numEtapa">
+    </mat-form-field>
+    <div style="display:inline; padding-left:35px;">
+        <button mat-raised-button [disabled]="class==true" [ngClass]="{'disabledButton': class==true}" style="background-color:teal;color:white;" id="start" (click)="start()" >
+            Inicio
+        </button>
+        <button mat-raised-button style="background-color:yellow;" [disabled]="class==false" [ngClass]="{'disabledButton': class==false}" (click)="pause()" >
+            Pausa
+        </button>
+        <button mat-raised-button color="warn" (click)="stop()" >
+            Parar
+        </button>
+    </div>
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile *ngFor="let f of arr;let i=index">
+          <div>{{f.value}}</div>
+        <mat-form-field [ngClass]="{'disabledButton': class==true}" id="nuevoEmpleado">
+        <mat-label>Empleado {{i+1}}</mat-label>
+            <mat-select [(value)]="f.empleadoSelected" (selectionChange)="addEmpleado(f.empleadoSelected)" >
+                <mat-option>Empleado</mat-option>
+                <mat-option *ngFor="let g of comboEmpleados" [value]="g" >
+                    {{g.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>   
+      
+    
+    </mat-grid-list> 
+    <br>
+    
+    </div>
+    

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Elija la referencia deseada</h1>
+
+<mat-form-field id="filtro">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+    <div class="mat-elevation-z8" style="width:100%;">
+      <div class="example-loading-shade">
+        <!-- <mat-spinner *ngIf="isLoadingResults"></mat-spinner> -->
+      </div>
+      <table mat-table [dataSource]="data" style="width:100%;"> 
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>Seleccion</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button matTooltip="" (click)="onRowClick(row)"> 
+                <mat-icon>done</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="color" >
+            <th mat-header-cell *matHeaderCellDef class="tableHeader"
+            >Color</th>
+            <td mat-cell *matCellDef="let row">
+                <input [style.background]="row.codigoColor" [disabled] style="border-radius:8px;"/>
+            </td>
+            
+          </ng-container>
+          <ng-container matColumnDef="leyenda" >
+            <th mat-header-cell *matHeaderCellDef class="tableHeader"
+            >Referencia</th>
+            <td mat-cell *matCellDef="let row">{{row.leyenda}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+    </div>

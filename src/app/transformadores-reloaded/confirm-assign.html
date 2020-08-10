@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>¿ Desea asignar la siguiente referencia al proceso seleccionado ? </h1>
+<br>
+<div mat-dialog-content>
+    <input [style.background]="colorSelected.codigoColor" [disabled] style="border-radius:8px; margin-right:5px;width:160px;"/>
+    <span style="margin-left:14px;">Referencia: <strong>{{colorSelected.leyenda}}</strong></span>
+</div>
+<br>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="basic" (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button style="background-color:teal;color:whitesmoke;" (click)="save()">Asignar</button>
+</div>

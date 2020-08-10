@@ -1,0 +1,97 @@
+<mat-card class="titulo">
+  <mat-card-header>
+      <mat-card-title style="line-height:60px;">Modificación de procesos</mat-card-title>
+  </mat-card-header>
+  <br>
+</mat-card>
+
+<mat-form-field id="filtro">
+  <mat-label>Filtrar</mat-label>
+  <input matInput (keyup)="applyFilter($event)">
+</mat-form-field>
+<div id="tabla1" class="mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <table mat-table [dataSource]="data" > 
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>Seleccion</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button matTooltip="Transformadores" (click)="onRowClick(row)"> 
+              <mat-icon svgIcon="fohama"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Potencia" sticky> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Potencia</th>
+            <td mat-cell *matCellDef="let row" >{{row.potencia}}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="oP" sticky>
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">oP</th>
+            <td mat-cell *matCellDef="let row">{{row.oPe }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="rango" sticky>
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">rango</th>
+            <td mat-cell *matCellDef="let row">{{row.rangoInicio}} / {{row.rangoFin}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="oT" sticky>
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">oT</th>
+            <td mat-cell *matCellDef="let row">{{row.oTe}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Cliente" sticky>
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Cliente</th>
+            <td mat-cell *matCellDef="let row">{{row.nombreCli}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Observaciones" sticky>
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Observaciones</th>
+            <td mat-cell *matCellDef="let row">{{row.observaciones}}</td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<br>
+<div id= "tabla2" class="mat-elevation-z8" *ngIf="isSelected">
+  <table mat-table [dataSource]="dataEtapaTransfo" > 
+    <ng-container matColumnDef="Accion">
+      <th mat-header-cell *matHeaderCellDef>Modificar/Borrar</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button matTooltip="Procesos" (click)="onProcessClick(row)"> 
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="NombreProceso" sticky> 
+        <th mat-header-cell *matHeaderCellDef class="tableHeader">Proceso</th>
+        <td mat-cell *matCellDef="let row" >{{row.nombreEtapa}}</td>
+    </ng-container>
+    <ng-container matColumnDef="FechaInicio" sticky> 
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Inicio</th>
+      <td mat-cell *matCellDef="let row" >{{row.dateIni}}</td>
+    </ng-container>
+    <ng-container matColumnDef="FechaFin" sticky> 
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Fin</th>
+      <td mat-cell *matCellDef="let row" >{{row.dateFin}}</td>
+    </ng-container>
+    <ng-container matColumnDef="TiempoParcial" sticky> 
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Tiempo Parcial</th>
+      <td mat-cell *matCellDef="let row" >{{row.tiempoParc}}</td>
+    </ng-container>
+    <ng-container matColumnDef="TiempoFin" sticky> 
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Tiempo Fin</th>
+      <td mat-cell *matCellDef="let row" >{{row.tiempoFin}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsEtapaTransfo; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsEtapaTransfo;"></tr>
+  </table>
+</div>
+

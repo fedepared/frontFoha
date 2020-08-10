@@ -1,0 +1,50 @@
+<style>
+    .cdk-column-Nombre-de-Etapa, .cdk-column-Fecha-inicio, .cdk-column-Fecha-fin,.cdk-column-Tiempo-Parcial,.cdk-column-Tiempo-Fin {
+    width:300px;
+    
+    }
+
+     .cdk-column-Fecha-inicio,.cdk-column-Fecha-Fin{
+      
+      padding-left:20px!important;
+      padding-right:20px!important;
+    }
+
+    ::ng-deep .cdk-overlay-pane{
+        margin-right:auto;
+        margin-left:auto!important;
+    }   
+</style>
+<mat-dialog-content style="margin-right:auto;margin-left:auto;">
+    <table mat-table [dataSource]="dataEtapaPorTransfo">
+    'Nombre de Etapa', 'Fecha Inicio', 'Fecha Fin','Tiempo Parcial', 'Tiempo Fin'
+    <ng-container matColumnDef="Nombre de Etapa">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Proceso</th>
+      <td mat-cell *matCellDef="let row">{{row.nombreEtapa}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Fecha Inicio">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Fecha inicio </th>
+      <td mat-cell *matCellDef="let row">{{row.dateIni|date:'MM/dd/yyyy'}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Fecha Fin">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Fecha fin</th>
+      <td mat-cell *matCellDef="let row">{{row.dateFin|date:'MM/dd/yyyy'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Tiempo Parcial">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Tiempo Parcial</th>
+      <td mat-cell *matCellDef="let row">{{row.tiempoParc}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Tiempo Fin">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Tiempo Fin</th>
+      <td mat-cell *matCellDef="let row">{{row.tiempoFin}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</mat-dialog-content>

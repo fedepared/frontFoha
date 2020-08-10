@@ -1,0 +1,30 @@
+<mat-card class="titulo">
+    <mat-card-header>
+        <mat-card-title style="line-height:60px;">Reporte Empleados</mat-card-title>
+    </mat-card-header>
+    <br>
+  </mat-card>
+
+  <mat-card style="text-align:center;">
+    <mat-card-header style="text-align:center;display:inline;">
+        <mat-card-title>Ingrese un empleado</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" style="display:inline;margin-left:auto;margin-right:auto;">
+            <mat-form-field class="example-full-width">
+              <mat-label>Empleado</mat-label>
+              <input type="text" matInput [formControl]="empleadosControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option.nombreEmp}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+          <button mat-fab style="background-color: teal;color:whitesmoke;display:inline;" (click)="search()">
+            <mat-icon>search</mat-icon>
+          </button>        
+    </mat-card-content>
+    <br>
+  </mat-card>
+  

@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+
+<mat-dialog-content >
+  <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>legajo</mat-label>
+
+        <input matInput
+                placeholder="legajo de Empleado"
+               formControlName="idEmpleado" [errorStateMatcher]="matcher" type="number">
+        <mat-error *ngIf="!form.hasError('required')">
+          El legajo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput
+                placeholder="nombre de Empleado"
+               formControlName="nombreEmp" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="!form.hasError('required')">
+        El nombre es <strong>requerido</strong>
+    </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Sector</mat-label>
+      <mat-select #idSector formControlName="idSector" >
+        <mat-option *ngFor="let sector of sectores" [value]="sector.idSector">
+          {{sector.nombreSector}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" [mat-dialog-close]="true" (click)="close()">Cancelar</button>
+    <button class="mat-raised-button mat-primary" [mat-dialog-close]="true" [disabled]="!form.valid" (click)="save()">{{labelButton}}</button>
+</mat-dialog-actions>
+

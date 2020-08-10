@@ -1,0 +1,56 @@
+/* Structure */
+#fondo{
+  background-image: url("../../../assets/logo-FOHAMA-transparente.png");
+  background-position:center;
+	background-repeat:no-repeat;
+	background-size:contain;
+  height:200px;
+  width:70%;
+  margin:auto;
+	/* width:200px; */
+}
+
+#logo{
+  width: 30vh;
+  height: auto;
+}
+
+.example-container {
+    position: relative;
+    padding: 5%;
+    height:100%;
+  }
+  
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 80%;
+    padding:0 10% 0;
+    
+  }
+  
+  .example-full-width:nth-last-child() {
+    margin-bottom: 10px;
+    padding-top:20px;
+  }
+  
+  .button-row {
+    margin: 10px 0;
+    padding: 0 50% 0;
+    display:inline;
+    
+  }
+  
+  .mat-flat-button {
+    margin: 5px;
+  }
+
+  .example-card{
+    width:50%;
+    height:220px;
+    margin:auto;
+  }

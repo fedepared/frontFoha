@@ -1,0 +1,15 @@
+<h3>Agregar Periodo:</h3>
+<mat-form-field>
+    <mat-label>Elija el mes</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let m of mes" [value]="m.value">
+        {{m.viewValue}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Elija el año</mat-label>
+    <input matInput="number" [(ngModel)]="anio"  type="number" placeholder="2020">
+</mat-form-field>
+<button mat-raised-button color="basic" (click)="onNoClick()">Cancelar</button>
+<button mat-raised-button style="background-color: teal;" (click)="save()">guardar</button>

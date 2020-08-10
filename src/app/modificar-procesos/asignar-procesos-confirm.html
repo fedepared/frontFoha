@@ -1,0 +1,9 @@
+<h1>{{titulo}}</h1>
+
+<div mat-dialog-content>
+  <p>Desea asignar el proceso seleccionado al transformador OP:{{data.oPe}} | OT:{{data.oTe}} | rango:{{data.rangoInicio}}/{{data.rangoFin}} ?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button style="background-color:teal;color:white;" (click)="click()" cdkFocusInitial>Ok</button>
+</div>

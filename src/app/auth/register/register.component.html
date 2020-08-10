@@ -1,0 +1,47 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div style="text-align:center;">
+      <img id="logo" src="../../../assets/logo fohama.svg">
+    </div>
+    <mat-card class="example-card">
+      <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+        <mat-form-field class="example-full-width">
+          <input matInput type="nombreUs" placeholder="nombre de usuario" formControlName="nombreUs"
+                 [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!registerForm.get('nombreUs').valid && registerForm.get('nombreUs').touched">Ingrese el nombre de usuario</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" placeholder="password" formControlName="pass"
+                 [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!registerForm.get('pass').valid && registerForm.get('pass').touched">Ingrese su contraseña</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+          <mat-label>Tipo de Usuario</mat-label>
+            <mat-select [(ngModel)]="selectedValue" formControlName="isOp" name="isOp">
+              <mat-option *ngFor="let isOp of isOp" [value]="isOp.value">
+                {{isOp.viewValue}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+          <mat-label>Sector</mat-label>
+            <mat-select [(ngModel)]="valorSector" formControlName="idSector" name="idSector">
+              <mat-option *ngFor="let sectores of comboSectores" [value]="sectores.id">
+                {{sectores.viewValue}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="button-row">
+          <button type="submit" [disabled]="!registerForm.valid" mat-flat-button color="primary">Register</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>

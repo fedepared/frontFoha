@@ -1,0 +1,17 @@
+<mat-card>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Referencia</mat-label>
+        <input matInput="number" [(ngModel)]="leyendaText"  type="text">
+    </mat-form-field>
+
+    <input [(colorPicker)]="color" [style.background]="color" style="border-radius:8px;"/>
+
+    <button mat-fab color="primary" (click)="addLeyenda()" style="margin-left:100px;" matTooltip="guardar nueva referencia">
+      <mat-icon>save</mat-icon>
+    </button>
+</mat-card>
+    
+<!-- <div class="float">
+</div> -->
+

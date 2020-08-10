@@ -1,0 +1,34 @@
+
+<div class="example-container mat-elevation-z8" style="margin:auto;">
+  <div class="example-loading-shade"
+  *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<div style="text-align:center;">
+  <img id="logo" src="assets/logofohama.svg">
+</div>
+<!-- <div id="fondo"> </div> -->
+<mat-card class="example-card">
+      <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
+        <mat-form-field class="example-full-width">
+          <input matInput type="usuario" placeholder="Ingrese el usuario" formControlName="nombreUs"
+                 [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!loginForm.get('nombreUs').valid && loginForm.get('nombreUs').touched">Ingrese su usuario</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" placeholder="Password" formControlName="pass"
+                 [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!loginForm.get('pass').valid && loginForm.get('pass').touched">Ingrese su contraseña</span>
+          </mat-error>
+        </mat-form-field>
+        <div style="margin-left:35%;">
+          <button type="submit" [disabled]="!loginForm.valid" mat-flat-button color="primary">Login</button>
+        
+          <button type="button" mat-flat-button color="primary" (click)="register()">Registrarse</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>

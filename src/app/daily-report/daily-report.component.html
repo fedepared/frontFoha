@@ -1,0 +1,84 @@
+
+<mat-card class="titulo">
+    <mat-card-header>
+        <mat-card-title style="line-height:60px;">Reportes</mat-card-title>
+    </mat-card-header>
+    <br>
+</mat-card>
+
+<!-- <mat-card style="text-align:center;margin-top:20px;">
+    <mat-form-field style="position:center;">
+        <input matInput [matDatepicker]="dp" placeholder="seleccione una fecha" [(formControl)]="date" (dateInput)="addEvent('input', $event)" disabled>
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button style="background-color: teal;color:white" (click)="search()" >
+        Buscar
+    </button>
+</mat-card> -->
+
+<mat-card style="text-align:center;margin-top:20px;">
+    <form  [formGroup]="form" style="display:inline;">
+        <mat-form-field>
+            <input matInput 
+                placeholder="Elija un rango de fechas" 
+                [satDatepicker]="picker" 
+                formControlName="date" disabled="false"
+                [value]="dateRangeDisp"
+                (dateChange)="saveDate($event)"
+            >
+            <sat-datepicker-toggle 
+                matSuffix 
+                [for]="picker">
+            </sat-datepicker-toggle>
+            <sat-datepicker 
+                #picker 
+                [rangeMode]="true" 
+                touchUi="true">
+            </sat-datepicker>
+            </mat-form-field>
+    </form>
+    <button mat-raised-button style="background-color: teal;color:white;display:inline;" (click)="search2()" >
+        Buscar
+    </button>
+</mat-card>
+   
+
+<mat-card *ngIf="noResult" style="text-align:center;">
+    <mat-card-header style="text-align:center;">
+    </mat-card-header>
+    <mat-card-content>
+        <img src="assets/logofohamagrande.jpg" height="100" width="100">
+      <p>
+        No hubo procesos finalizados en el rango elegido
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+<div id= "tabla2" class="example-container mat-elevation-z8" *ngIf="isSelected">
+    <table mat-table [dataSource]="resultado" > 
+        <ng-container matColumnDef="numEtapa"> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Nº Referencia Proceso</th>
+            <td mat-cell *matCellDef="let row" >{{row.numEtapa}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dateIni"> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Fecha Inicio</th>
+            <td mat-cell *matCellDef="let row" >{{row.dateIni | date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dateFin"> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Fecha Fin</th>
+            <td mat-cell *matCellDef="let row" >{{row.dateFin | date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="tiempoFin"> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Tiempo neto</th>
+            <td mat-cell *matCellDef="let row" >{{row.tiempoFin}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Transformador"> 
+            <th mat-header-cell *matHeaderCellDef class="tableHeader">Transformador</th>
+            <td mat-cell *matCellDef="let row" >rango: {{row.idTransfoNavigation.rangoInicio}}/{{row.idTransfoNavigation.rangoInicio}} | OP: {{row.idTransfoNavigation.oPe}} | OT: {{row.idTransfoNavigation.oTe}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

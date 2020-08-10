@@ -1,0 +1,64 @@
+<mat-card class="titulo">
+  <mat-card-header>
+      <mat-card-title style="line-height:60px;">Empleados</mat-card-title>
+  </mat-card-header>
+  <br>
+</mat-card>
+<!--Tabla empleados-->
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+  *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<mat-form-field style="width:100%;">
+  <mat-label>Filtro</mat-label>
+  <input matInput (keyup)="applyFilter($event)">
+</mat-form-field>
+
+
+              <div id="agregar">
+                <button mat-fab color="primary" (click)="dialogAddEmp()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+          <table mat-table [dataSource]="data" multiTemplateDataRows class="example-table">
+      
+            <!-- ID -->
+            <ng-container matColumnDef="idEmpleado" >
+              <th mat-header-cell *matHeaderCellDef class="tableHeader"
+              >legajo</th>
+              <td mat-cell *matCellDef="let row">{{row.idEmpleado}}</td>
+            </ng-container>
+      
+            <!-- nombre Empleado -->
+            <ng-container matColumnDef="nombreEmp" >
+              <th mat-header-cell *matHeaderCellDef class="tableHeader">nombre </th>
+              
+              <td mat-cell *matCellDef="let row">{{row.nombreEmp}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="sector" >
+              <th mat-header-cell *matHeaderCellDef class="tableHeader">Sector </th>
+              
+              <td mat-cell *matCellDef="let row">{{row.sector.nombreSector}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef class="tableHeader"> Accion </th>
+              <td mat-cell *matCellDef="let row" > 
+                <button mat-fab color="warn" (click)="dialogDeleteEmp(row)" >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-fab color="primary"  (click)="dialogEditEmp(row)">
+                  <mat-icon>edit</mat-icon>
+                </button>   
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+        
+      </div>

@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+
+<mat-dialog-content style="height:100%;">
+  <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>potencia</mat-label>
+
+        <input matInput
+                placeholder="potencia"
+               formControlName="potencia" [errorStateMatcher]="matcher" type="number">
+        <mat-error *ngIf="!form.hasError('required')">
+          La potencia es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>oP</mat-label>
+      <input matInput
+                placeholder="op"
+               formControlName="oPe" [errorStateMatcher]="matcher" type="text">
+      <mat-error *ngIf="!form.hasError('required')">
+        El op es<strong>requerido</strong>
+    </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>oT</mat-label>
+      <input matInput
+                placeholder="ot"
+               formControlName="oTe" [errorStateMatcher]="matcher" type="number">
+      <mat-error *ngIf="!form.hasError('required')">
+        El ot es<strong>requerido</strong>
+    </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field>
+      <mat-label>Tipo de Transformador</mat-label>
+      <mat-select #idTipoTransfo formControlName="idTipoTransfo">
+        <mat-option *ngFor="let valueTransfo of dataTipoTransfo" [value]="valueTransfo.id" >
+          {{valueTransfo.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <br>
+    <div *ngIf="f">
+      <div>Cliente:</div>
+      <br>
+      <span>{{f.nombreCli}}</span> 
+      <button mat-button matTooltip="Por favor, vuelva a elegir un cliente">
+        <mat-icon style="color:red">error_outline</mat-icon>
+    </button>
+    </div>
+    <mat-form-field  style="width:280px;">
+      <mat-label>Elegir cliente</mat-label>
+      <input type="text" matInput formControlName="f" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let f of filteredOptions | async" [value]="f">
+          {{f.value}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <mat-label>Elegir Cliente</mat-label>
+      <mat-select #idCliente formControlName="idCliente">
+        <mat-option *ngFor="let f of diego2" [value]="f.id" >
+          {{f.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <br>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>observaciones</mat-label>
+      <input matInput
+                placeholder="observaciones"
+               formControlName="observaciones" [errorStateMatcher]="matcher" type="text">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" [mat-dialog-close]="true" (click)="close()">Cancelar</button>
+    <button class="mat-raised-button mat-primary" style="background-color: teal;" [mat-dialog-close]="true" (click)="save()">{{labelButton}}</button>
+</mat-dialog-actions>

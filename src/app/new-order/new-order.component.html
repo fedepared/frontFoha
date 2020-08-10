@@ -1,0 +1,57 @@
+<mat-card class="titulo">
+    <mat-card-header>
+        <mat-card-title style="line-height:60px;">Orden de prioridades</mat-card-title>
+    </mat-card-header>
+    <br>
+  </mat-card>
+<div cdkDropListGroup style="display: flex;">
+    <div *ngFor="let d of transfoInter; let i=index" style="flex:1 1 auto;margin:20px;">
+        <h3 style="width:40%;">
+            <div [ngSwitch]="d.id.slice(13,15)" style="display:inline;">
+              <p *ngSwitchCase="'1'" style="display:inline;">Enero</p>
+              <p *ngSwitchCase="'2'" style="display:inline;">Febrero</p>
+              <p *ngSwitchCase="'3'" style="display:inline;">Marzo</p>
+              <p *ngSwitchCase="'4'" style="display:inline;">Abril</p>
+              <p *ngSwitchCase="'5'" style="display:inline;">Mayo</p>
+              <p *ngSwitchCase="'6'" style="display:inline;">Junio</p>
+              <p *ngSwitchCase="'7'" style="display:inline;">Julio</p>
+              <p *ngSwitchCase="'8'" style="display:inline;">Agosto</p>
+              <p *ngSwitchCase="'9'" style="display:inline;">Septiembre</p>
+              <p *ngSwitchCase="'10'" style="display:inline;">Octubre</p>
+              <p *ngSwitchCase="'11'" style="display:inline;">Noviembre</p>
+              <p *ngSwitchCase="'12'" style="display:inline;">Diciembre</p>
+            </div>
+            &nbsp;
+            <div style="display:inline;">{{d.id | slice:4:8}}</div>
+        </h3>
+        <app-order-reloaded
+        [items]="d.lista"
+        (itemsRemoved)="itemsRemoved($event, d.id)"
+        (itemsAdded)="itemsAdded($event, d.id)"
+        (itemsUpdated)="itemsUpdated($event, d.id)"
+        (selectionChanged)="selectionChanged($event, transfoInter)"
+        style="display: inline;">
+        <ng-template let-item style="display: inline;">
+            OT: {{ item.oTe }} OP: {{item.oPe}} Rango: {{item.rangoInicio}}/{{item.rangoFin}}
+        </ng-template>
+        </app-order-reloaded>
+        <br/>
+    </div>
+</div>
+<br/>
+
+<div class="float" style="bottom:70px;">
+    <button mat-fab color="primary" (click)="save()" matTooltip="Guardar orden">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+  <div class="float">
+    <button mat-fab color="primary" (click)="addAnioMes()" matTooltip="Agregar período">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+<!-- <div *ngFor="let ev of events">
+    {{ev.text}}
+  </div> -->
+  

@@ -1,0 +1,50 @@
+<mat-card class="titulo">
+  <mat-card-header>
+      <mat-card-title style="line-height:60px;">Orden de prioridades</mat-card-title>
+  </mat-card-header>
+  <br>
+</mat-card>
+
+<!-- Lista -->
+
+
+<div class="example-container" *ngFor="let d of transfoInter; let i=index">
+  <h3>
+
+    <div [ngSwitch]="d.id.slice(13,15)" style="display:inline;">
+      <p *ngSwitchCase="'1'" style="display:inline;">Enero</p>
+      <p *ngSwitchCase="'2'" style="display:inline;">Febrero</p>
+      <p *ngSwitchCase="'3'" style="display:inline;">Marzo</p>
+      <p *ngSwitchCase="'4'" style="display:inline;">Abril</p>
+      <p *ngSwitchCase="'5'" style="display:inline;">Mayo</p>
+      <p *ngSwitchCase="'6'" style="display:inline;">Junio</p>
+      <p *ngSwitchCase="'7'" style="display:inline;">Julio</p>
+      <p *ngSwitchCase="'8'" style="display:inline;">Agosto</p>
+      <p *ngSwitchCase="'9'" style="display:inline;">Septiembre</p>
+      <p *ngSwitchCase="'10'" style="display:inline;">Octubre</p>
+      <p *ngSwitchCase="'11'" style="display:inline;">Noviembre</p>
+      <p *ngSwitchCase="'12'" style="display:inline;">Diciembre</p>
+    </div>
+    &nbsp;
+    <div style="display:inline;">{{d.id | slice:4:8}}</div>
+  </h3>
+
+    <div cdkDropList id="{{d.id}}" [cdkDropListData]="d.lista"
+      [cdkDropListConnectedTo]="connectedTo" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box"cdkDrag *ngFor="let k of d.lista">OP: {{k.oPe}} OT: {{k.oTe}} Rg: {{k.rangoInicio}}/{{k.rangoFin}} </div>
+    </div>
+  
+</div>
+<div class="float" style="bottom:70px;">
+  <button mat-fab color="primary" (click)="save($event)" matTooltip="Guardar orden">
+    <mat-icon>save</mat-icon>
+  </button>
+</div>
+<div class="float">
+  <button mat-fab color="primary" (click)="addAnioMes()" matTooltip="Agregar período">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+
+

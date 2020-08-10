@@ -1,0 +1,63 @@
+<mat-card class="titulo">
+    <mat-card-header>
+        <mat-card-title style="line-height:60px;">Referencias</mat-card-title>
+    </mat-card-header>
+    <br>
+</mat-card>
+<button mat-raised-button mat-fab color="primary" (click)="agregar()" matTooltip="agregar referencia" >
+    <mat-icon>add</mat-icon>
+</button>
+<div *ngFor="let p of referencias"><app-leyendas (colorUpdated)="updateColours($event)"></app-leyendas></div>
+
+<br>
+<br>
+<br>
+
+<mat-card class="titulo" style="background-color:darkslateblue;">
+    <mat-card-header>
+        <mat-card-title style="line-height:60px;">Lista de referencias</mat-card-title>
+    </mat-card-header>
+    <br>
+</mat-card>
+<!--Tabla Referencias-->
+<div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+    *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataColores" multiTemplateDataRows class="example-table">
+        
+              <!-- Color elegido -->
+              <ng-container matColumnDef="codigoColor" >
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"
+                >Color</th>
+                <td mat-cell *matCellDef="let row">
+                    <input [style.background]="row.codigoColor" [disabled] style="border-radius:8px;"/>
+                </td>
+                
+              </ng-container>
+        
+              <!-- nombre Leyenda -->
+              <ng-container matColumnDef="leyenda" >
+                <th mat-header-cell *matHeaderCellDef class="tableHeader">Referencia </th>
+                
+                <td mat-cell *matCellDef="let row">{{row.leyenda}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef class="tableHeader"> Accion </th>
+                <td mat-cell *matCellDef="let row" > 
+                  <button mat-fab color="warn" (click)="dialogDeleteRef(row)" >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+          </div>
+        </div>
+  
